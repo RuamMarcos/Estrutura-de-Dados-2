@@ -18,7 +18,7 @@ CircList *create_CircList() {
 }
 
 // Função para inserir um elemento na lista circular
-bool CircList_insert(CircList *list, char *value, int fone) {
+bool CircList_insert(CircList *list, char *value, long int fone) {
     TNo *new_node = (TNo*) malloc(sizeof(TNo));
 
     if (new_node == NULL) {
@@ -54,7 +54,7 @@ bool CircList_print(CircList *list) {
         printf("A Lista está vazia!\n");
         return false;
     }
-
+    printf("%s", list->nome);
     printf("\nQty: %d\n", list->qty);
     printf("=========================\n");
 
@@ -67,4 +67,8 @@ bool CircList_print(CircList *list) {
 
     printf("=========================\n");
     return true;
+}
+
+void CircList_rename(CircList *list, char *nome){
+    strcpy(list->nome, nome);
 }

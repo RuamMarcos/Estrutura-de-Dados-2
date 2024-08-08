@@ -8,10 +8,11 @@ typedef struct _node {
     struct _node *next;
     unsigned int id;
     char nome[129];
-    int contato;
+    long int contato;
 } TNo;
 
 typedef struct _circular_list {
+    char nome[50];
     TNo *start;
     int qty;
     int size;
@@ -20,8 +21,9 @@ typedef struct _circular_list {
 // Declarações das funções
 CircList *create_CircList();
 
-bool CircList_insert(CircList *list, char *value, int fone);
+bool CircList_insert(CircList *list, char *value, long int fone);
 
 bool CircList_print(CircList *list);
 
+void CircList_rename(CircList *list, char *);
 #endif // LINKED_LIST_H
