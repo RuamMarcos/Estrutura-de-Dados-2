@@ -9,7 +9,7 @@
 void gerarMenu(){
 
     system("cls");
-    printf("\n\nMenu agenda\n");
+    printf("\n\n\nMenu agenda\n");
     printf("===========================\n");
     printf(" [1] | INSERIR CONTATOS\n");
     printf(" [2] | LISTAR CONTATOS\n");
@@ -45,65 +45,50 @@ void inserirContato(CircList *agenda){
 }
 
 void listarContatos(CircList *agenda){
-    char nome[129];
-    int telefone;
     system("cls");
-    printf("Nome: ");
-    scanf("%128s", nome);
-                
+    CircList_print(agenda);
+    printf("\n\n");
+
+    printf("Pressione Enter para voltar ao menu");
     getchar();
-
-    printf("Telefone: ");
-    scanf("%ld", &telefone);
-
-    system("cls");
-    if(CircList_insert(agenda, nome, telefone)){
-        printf("Numero inserido com sucesso!");   
-    }else{
-        printf("Falha ao inserir numero!");
-    }
-
-    Sleep(3000);
+    getchar();
 }
 
-void buscarContatos(CircList *list){
-    
-    char input[129];
+void buscarContatos(CircList *list) {
+    char input[128 + 1] = {0}; // String de entrada com capacidade para 128 caracteres e o caractere nulo '\0'
     int length = 0;
-        // Criar um método "modoBusca":
-        // -> atualizar o valor da string de busca a cada atualização inserida.
-        // -> Chama o método de Pesquisar a cada atualização
-
-        // Criar método "pesquisar"
-        // -> limpar tela
-        // -> Imprimir contatos com o texto de busca encontrado
 
     while (1) {
         system("cls");
-        TNo aux = agenda->start;
+        TNo *aux = list->start;
         printf("\n============================\n\n");
-        do{
-            if(strncmp(input, aux->nome, length) == 0){
-                printf("%d | %s | %d\n", aux->id, aux->nome, aux->contato);
-            }
-            aux = aux->next;
-        }while(aux->next !- agenda->start);
+
+        if (aux != NULL) { // Verifica se a lista não está vazia
+            do {
+                if (strncmp(input, aux->nome, length) == 0) {
+                    printf("%d | %s | %d\n", aux->id, aux->nome, aux->contato);
+                }
+                aux = aux->next;
+            } while (aux != list->start); // Ajustado para percorrer toda a lista circular
+        }
+
         printf("\n============================\n\n");
         printf(">> ");
 
         if (_kbhit()) {
             char c = _getch();  // Lê o caractere pressionado
 
-            if(c == 13) break;
+            if (c == 13) { // Enter
+                break;
+            }
 
-            if (c == 8) {  // Detecta o backspace (ASCII 8)
+            if (c == 8) {  // Backspace (ASCII 8)
                 if (length > 0) {
                     length--;
                     input[length] = '\0';
                     printf("\b \b");  // Move o cursor para trás e apaga o caractere
                 }
-            } else if (length < 129 - 1) {
-                // Armazena o caractere e incrementa o tamanho da string
+            } else if (length < 129 - 1) { // Limita o comprimento da string
                 input[length++] = c;
                 input[length] = '\0';
 
@@ -111,11 +96,7 @@ void buscarContatos(CircList *list){
                 printf("%c", c);
             }
         }
-    
-        
     }
-
-
 }
 
 void renomearAgenda(CircList *agenda){
@@ -126,7 +107,7 @@ void renomearAgenda(CircList *agenda){
     scanf("%49s", nome);
 
     system("cls");
-    printf("\n\nAgenda renomeada!");
+    printf("\n\n\nAgenda renomeada!");
     Sleep(3000);
     CircList_rename(agenda, nome);
 }

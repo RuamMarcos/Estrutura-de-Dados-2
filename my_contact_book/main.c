@@ -17,45 +17,35 @@ int main() {
         printf("Erro ao criar Agenda!\n");
         return -1;
     }
-
-   buscarContatos(agenda);
     
     printf("\n\n%s", input);
 
-    // while (option != 5)
-    // {
-     
+    while (option != 5){
 
-    //     // scanf("%d", &option);
+        gerarMenu();
+        scanf("%d", &option);
         
-    //     switch (option) {
-    
-    //         case 1:  
-                
-              
-    //             break;
+        switch (option) {
+            case 1:  
+                inserirContato(agenda);        
+                break;
+            case 2:
+                listarContatos(agenda);        
+                break;
+            case 3:
+                buscarContatos(agenda);
+                break;
+            case 4:
+                renomearAgenda(agenda);       
+                break;
+            case 5:
+                break;
+            default:
+                opcaoInvalida();            
+            break;
+        }
 
-    //         case 2:
-                
-    //             break;
-
-    //         case 3:
-    //             break;
-
-    //         case 4:
-               
-    //             break;
-
-    //         case 5:
-    //             break;
-
-    //         default:
-                
-    //             break;
-    //     }
-
-        
-    // }
+    }
     
 
     
