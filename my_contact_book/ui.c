@@ -79,6 +79,18 @@ void buscarContatos(CircList *list){
         // -> Imprimir contatos com o texto de busca encontrado
 
     while (1) {
+        system("cls");
+        TNo aux = agenda->start;
+        printf("\n============================\n\n");
+        do{
+            if(strncmp(input, aux->nome, length) == 0){
+                printf("%d | %s | %d\n", aux->id, aux->nome, aux->contato);
+            }
+            aux = aux->next;
+        }while(aux->next !- agenda->start);
+        printf("\n============================\n\n");
+        printf(">> ");
+
         if (_kbhit()) {
             char c = _getch();  // Lê o caractere pressionado
 
@@ -100,6 +112,7 @@ void buscarContatos(CircList *list){
             }
         }
     
+        
     }
 
 
