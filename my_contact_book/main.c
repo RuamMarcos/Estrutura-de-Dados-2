@@ -2,14 +2,15 @@
 #include <stdlib.h>
 #include <string.h>
 #include <windows.h>
+#include <conio.h>
+#include "Ui.h"
 #include "LinkedList.h"
-
-void gerarMenu();
 
 int main() {
     int option;
-    char nome[129];
-    long int telefone;
+    char input[129];
+    int length = 0;
+    
     CircList *agenda = create_CircList();
 
     if (agenda == NULL) {
@@ -17,90 +18,47 @@ int main() {
         return -1;
     }
 
-    gerarMenu();
-
-    while (option != 5)
-    {
-        gerarMenu();
-
-        scanf("%d", &option);
-        
-        switch (option) {
+   buscarContatos(agenda);
     
-            case 1:  
+    printf("\n\n%s", input);
+
+    // while (option != 5)
+    // {
+     
+
+    //     // scanf("%d", &option);
+        
+    //     switch (option) {
+    
+    //         case 1:  
                 
-                system("cls");
-                printf("Nome: ");
-                scanf("%128s", nome);
+              
+    //             break;
+
+    //         case 2:
                 
-                getchar();
+    //             break;
 
-                printf("Telefone: ");
-                scanf("%ld", &telefone);
+    //         case 3:
+    //             break;
 
-                system("cls");
-                if(CircList_insert(agenda, nome, telefone)){
-                    printf("Numero inserido com sucesso!");   
-                }else{
-                    printf("Falha ao inserir numero!");
-                }
+    //         case 4:
+               
+    //             break;
 
-                Sleep(3000);
+    //         case 5:
+    //             break;
 
-                break;
-
-            case 2:
-                system("cls");
-                CircList_print(agenda);
+    //         default:
                 
-                printf("\nPressione Enter para voltar ao menu\n>>");
-                getchar();
-                getchar();
-                break;
-
-            case 3:
-                break;
-
-            case 4:
-                system("cls");
-                printf("Digite o nome da agenda: ");
-                scanf("%49s", nome);
-
-                system("cls");
-                printf("\n\nAgenda renomeada!");
-                Sleep(3000);
-                CircList_rename(agenda, nome);
-                break;
-
-            case 5:
-                break;
-
-            default:
-                printf("Escolha uma opcao valida!");
-                Sleep(4000);
-                break;
-        }
+    //             break;
+    //     }
 
         
-    }
+    // }
     
 
     
 
     return 0;
-}
-
-void gerarMenu(){
-
-    system("cls");
-    printf("\n\nMenu agenda\n");
-    printf("===========================\n");
-    printf(" [1] | INSERIR CONTATOS\n");
-    printf(" [2] | LISTAR CONTATOS\n");
-    printf(" [3] | BUSCAR CONTATOS\n");
-    printf(" [4] | RENOMEAR AGENDA\n");
-    printf(" [5] | SAIR\n");
-    printf("===========================\n");
-    printf(">> ");
-    
 }
