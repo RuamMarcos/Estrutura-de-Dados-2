@@ -20,7 +20,7 @@ int main() {
     
     printf("\n\n%s", input);
 
-    while (option != 5){
+    while (option != 7){
 
         gerarMenu();
         scanf("%d", &option);
@@ -39,10 +39,12 @@ int main() {
                 renomearAgenda(agenda);       
                 break;
             case 5:
+                salvaContatos(agenda);
                 break;
-            // case 6:
-            //     salvaContatos(agenda);
-            //     break;
+            case 6:
+                break;
+            case 7:
+                break;
             default:
                 opcaoInvalida();            
             break;

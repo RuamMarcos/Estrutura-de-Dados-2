@@ -6,6 +6,7 @@ void inserirContato(CircList *agenda);
 void listarContatos(CircList *agenda);
 void buscarContatos(CircList *list);
 void renomearAgenda(CircList *agenda);
+void salvaContatos(CircList *list);
 void opcaoInvalida();
 
 #endif

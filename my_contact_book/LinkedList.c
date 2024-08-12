@@ -34,9 +34,9 @@ bool CircList_insert(CircList *list, char *value, long int fone) {
         TNo *aux = list->start;
 
         // Encontrar o último nó na lista circular
-        while (aux->next != list->start) {
+        while (aux->next != NULL && strcmp(aux->next->nome, new_node->nome) <= 0) {
             aux = aux->next;
-        }
+        }   
 
         aux->next = new_node;
         new_node->next = list->start;

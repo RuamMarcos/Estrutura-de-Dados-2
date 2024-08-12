@@ -9,13 +9,15 @@
 void gerarMenu(){
 
     system("cls");
-    printf("\n\n\nMenu agenda\n");
+    printf("\n\n\n\nMenu agenda\n");
     printf("===========================\n");
     printf(" [1] | INSERIR CONTATOS\n");
     printf(" [2] | LISTAR CONTATOS\n");
     printf(" [3] | BUSCAR CONTATOS\n");
     printf(" [4] | RENOMEAR AGENDA\n");
-    printf(" [5] | SAIR\n");
+    printf(" [5] | SALVAR ARQUIVOS\n");
+    printf(" [6] | CARREGAR ARQUIVO\n");
+    printf(" [7] | SAIR\n");
     printf("===========================\n");
     printf(">> ");
     
@@ -36,9 +38,9 @@ void inserirContato(CircList *agenda){
 
     system("cls");
     if(CircList_insert(agenda, nome, telefone)){
-        printf("Numero inserido com sucesso!");   
+        printf("\n\nNumero inserido com sucesso!");   
     }else{
-        printf("Falha ao inserir numero!");
+        printf("\n\nFalha ao inserir numero!");
     }
 
     Sleep(3000);
@@ -57,29 +59,17 @@ void listarContatos(CircList *agenda){
 void buscarContatos(CircList *list) {
     char input[128 + 1] = {0}; // String de entrada com capacidade para 128 caracteres e o caractere nulo '\0'
     int length = 0;
+    TNo *aux = list->start;
 
-    while (1) {
-        
-        TNo *aux = list->start;
         system("cls");
         //Lista os contatos
         printf("\n============================\n\n");
-
-        if (aux != NULL) { // Verifica se a lista não está vazia
-            do {
-
-                if (strncmp(input, aux->nome, length) == 0) {
-                    printf("%d | %s | %d\n", aux->id, aux->nome, aux->contato);
-                }
-                aux = aux->next;
-            } while (aux != list->start); // Ajustado para percorrer toda a lista circular
-        }else{
-            printf("Digite algo...");
-        }
-
+        printf("Digite algo...");
         printf("\n============================\n\n");
         printf(">> %s", input);
 
+    while (1) {
+ 
         if (_kbhit()) {
 
             
@@ -102,6 +92,25 @@ void buscarContatos(CircList *list) {
 
                 
             }
+
+            system("cls");
+            //Lista os contatos
+            printf("\n============================\n\n");
+
+            if (aux != NULL) { // Verifica se a lista não está vazia
+            do {
+
+                if (strncmp(input, aux->nome, length) == 0) {
+                    printf("%d | %s | %d\n", aux->id, aux->nome, aux->contato);
+                }
+                aux = aux->next;
+            } while (aux != list->start); // Ajustado para percorrer toda a lista circular
+            }else{
+                printf("Não há contatos com essas iniciais...");
+            }
+
+            printf("\n============================\n\n");
+            printf(">> %s", input);
         }
     }
 }
@@ -125,30 +134,39 @@ void opcaoInvalida(){
     Sleep(4000);
 }
 
-// void salvaContatos(CircList *list){
-//     FILE *file = fopen(list->nome, "w");
-//     char linha[100];
-//     fprintf(file, list->nome);
-//     fprintf(file, "\nQty: ");
-//     fprintf(file, list->qty);
-//     fprintf(file, "=========================\n");
+void salvaContatos(CircList *list){
+    FILE *file = fopen(list->nome, "w");
+    char linha[100] = "";
+    fprintf(file, list->nome);
+    fprintf(file, "\nQty: ");
+    char num[20];
+    itoa(list->qty, num, 10);
+    fprintf(file, num);
+    fprintf(file, "\n=========================\n");
 
-//     TNo *aux = list->start;
+    TNo *aux = list->start;
 
-//     do {
-//         strcat(linha, aux->id);
-//         strcat(linha, " | ");
-//         strcat(linha, aux->nome);
-//         strcat(linha, " | ");
-//         strcat(linha, aux->contato);
-//         strcat(linha, "\n");
+    do {
+        itoa(aux->id, num, 10);
+        strcat(linha, num);
+        strcat(linha, " | ");
+        strcat(linha, aux->nome);
+        strcat(linha, " | ");
+        itoa(aux->contato, num, 10);
+        strcat(linha, num);
+        strcat(linha, "\n");
 
-//         fprintf(file, linha);
-//         linha[0] = "\0";
+        fprintf(file, linha);
+        linha[0] = '\0';
 
 
-//         aux = aux->next;
-//     } while (aux != list->start);
+        aux = aux->next;
+    } while (aux != list->start);
 
-//     fprintf(file, "=========================\n");
-// }
+    fprintf(file, "=========================\n");
+    fclose(file);
+    system("cls");
+   
+    printf("\n\nSalvando arquivos...");
+    Sleep(1500);
+}

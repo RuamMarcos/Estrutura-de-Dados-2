@@ -6,7 +6,7 @@
 // Definição das estruturas TNo e CircList
 typedef struct _node {
     struct _node *next;
-    unsigned int id;
+    int id;
     char nome[129];
     long int contato;
 } TNo;
