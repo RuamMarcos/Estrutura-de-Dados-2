@@ -59,23 +59,31 @@ void buscarContatos(CircList *list) {
     int length = 0;
 
     while (1) {
-        system("cls");
+        
         TNo *aux = list->start;
+        system("cls");
+        //Lista os contatos
         printf("\n============================\n\n");
 
         if (aux != NULL) { // Verifica se a lista não está vazia
             do {
+
                 if (strncmp(input, aux->nome, length) == 0) {
                     printf("%d | %s | %d\n", aux->id, aux->nome, aux->contato);
                 }
                 aux = aux->next;
             } while (aux != list->start); // Ajustado para percorrer toda a lista circular
+        }else{
+            printf("Digite algo...");
         }
 
         printf("\n============================\n\n");
-        printf(">> ");
+        printf(">> %s", input);
 
         if (_kbhit()) {
+
+            
+            system("cls");
             char c = _getch();  // Lê o caractere pressionado
 
             if (c == 13) { // Enter
@@ -92,8 +100,7 @@ void buscarContatos(CircList *list) {
                 input[length++] = c;
                 input[length] = '\0';
 
-                // Exibe o caractere digitado
-                printf("%c", c);
+                
             }
         }
     }
@@ -105,14 +112,43 @@ void renomearAgenda(CircList *agenda){
     system("cls");
     printf("Digite o nome da agenda: ");
     scanf("%49s", nome);
+    CircList_rename(agenda, nome);
 
     system("cls");
     printf("\n\n\nAgenda renomeada!");
-    Sleep(3000);
-    CircList_rename(agenda, nome);
+    Sleep(1000);
+    
 }
 
 void opcaoInvalida(){
     printf("Escolha uma opcao valida!");
     Sleep(4000);
 }
+
+// void salvaContatos(CircList *list){
+//     FILE *file = fopen(list->nome, "w");
+//     char linha[100];
+//     fprintf(file, list->nome);
+//     fprintf(file, "\nQty: ");
+//     fprintf(file, list->qty);
+//     fprintf(file, "=========================\n");
+
+//     TNo *aux = list->start;
+
+//     do {
+//         strcat(linha, aux->id);
+//         strcat(linha, " | ");
+//         strcat(linha, aux->nome);
+//         strcat(linha, " | ");
+//         strcat(linha, aux->contato);
+//         strcat(linha, "\n");
+
+//         fprintf(file, linha);
+//         linha[0] = "\0";
+
+
+//         aux = aux->next;
+//     } while (aux != list->start);
+
+//     fprintf(file, "=========================\n");
+// }
