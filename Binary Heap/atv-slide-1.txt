@@ -1,0 +1,28 @@
+Ativdade - Max Heap
+
+a) 23 - 17 - 14 - 6 - 13 - 10 - 1 - 5 - 7 - 12
+
+	a[patern(9)] = 6
+	a[9] = 7
+
+	O pai do elemento 9 é menor que ele, por isso não é uma binary max-heap.
+
+b) 40 - 11 - 23 - 6 - 9 - 12 - 13 - 5 - 7 - 2 - 10
+
+	Não pode ser uma binary max-heap, pois a[9] > a[4]
+						 ^      ^
+						 7      6   
+
+c) 11 - 10 - 9 - 8 - 7 - 6 - 5 - 4 - 3 - 2 - 1
+
+	Pode ser uma binary max-heap, pois está em ordem crescente, e então qualquer elemento é menor que todos os anteriores.
+
+d) 11 - 9 - 10 - 7 - 6 - 4 - 5 
+
+	Pode ser uma binary max-heap.
+
+
+===========================================================
+
+Atividade - Min Heap
+
